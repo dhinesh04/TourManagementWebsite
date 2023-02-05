@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>BOOKING AND RESERVATION</title>
+<CENTER>
+<h1>BOOKING AND RESERVATION</h1>
+</CENTER>
+<link rel="stylesheet" type="text/css" href="bookingstyle.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+</head>
+<body>
+<form action="booking.php" method="post">
+    <div class="elem-group">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Dhinesh v" pattern=[A-Z\sa-z]{3,20} required>
+    </div>
+    <div class="elem-group">
+      <label for="email">Your E-mail</label>
+      <input type="email" id="email" name="email" placeholder="abc@email.com" required>
+    </div>
+    <div class="elem-group">
+      <label for="phone">Your Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="998-348-3872" pattern=(\d{3})-?\s?(\d{3})-?\s?(\d{4}) required>
+    </div>
+    <hr>
+    <div class="elem-group inlined"> 
+      <label for="adult">Persons</label>
+      <input type="number" id="adult" name="adults_count" placeholder="2" min="1" required>
+    </div>
+<!--    <div class="elem-group inlined">
+      <label for="child">Children</label>
+      <input type="number" id="child" name="child_count" placeholder="2" min="0" required>
+    </div>-->
+    <div class="elem-group inlined">
+    <label for="checkin-date">From Date</label>
+    <input type="date" id="checkin-date" name="from_date" required>
+  </div>
+  <div class="elem-group inlined">
+    <label for="checkout-date">To Date</label>
+    <input type="date" id="checkout-date" name="to_date" required>
+  </div>
+    <div class="elem-group">
+      <label for="room-selection">Select a Package</label>
+      <select id="room-selection" name="tour_package" required>
+          <option value="">Choose a package from the List</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="New Delhi">New Delhi</option>
+          <option value="Canada"> Western Canada</option>
+          <option value="New York">New York</option>
+      </select>
+    </div>
+<!--    <div class="elem-group">
+      <label for="room-selection">Select a Room</label>
+      <select id="room-selection" name="room_preference" required>
+          <option value="">Choose a Room from the List</option>
+          <option value="KNC">Hotel NKC, Delhi</option>
+          <option value="Ilive">Hotel ILive Inn, Mumbai</option>
+          <option value="Radission">Radission Blue GRT, Canada</option>
+          <option value="Fab">Fab Sasti Inn, New York</option>
+      </select>
+    </div>-->
+    <hr>
+    <div class="elem-group">
+      <label for="message">Anything Else?</label>
+      <textarea id="message" name="comments" placeholder="Tell us anything else that might be important." required></textarea>
+    </div>
+    <button type="submit">Book Your Tour!</button>
+  </form>
+  <script>
+    var currentDateTime = new Date();
+    var year = currentDateTime.getFullYear();
+    var month = (currentDateTime.getMonth() + 1);
+    var date = (currentDateTime.getDate() + 1);
+
+    if(date < 10) {
+      date = '0' + date;
+    }
+    if(month < 10) {
+      month = '0' + month;
+    }
+
+    var dateTomorrow = year + "-" + month + "-" + date;
+    var checkinElem = document.querySelector("#checkin-date");
+    var checkoutElem = document.querySelector("#checkout-date");
+
+    checkinElem.setAttribute("min", dateTomorrow);
+
+    checkinElem.onchange = function () {
+        checkoutElem.setAttribute("min", this.value);
+    }
+  </script>
+  </body>
+</html>
